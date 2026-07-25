@@ -1,9 +1,39 @@
 :root {
-  color-scheme: light dark;
+  color-scheme: dark;
+
+  --background-primary: #0d0d0d;
+  --background-secondary: #161616;
+  --background-elevated: #1f1f1f;
+
+  --neutral-foreground-rest: #f5f5f5;
+  --neutral-foreground-hover: #ff4d4d;
+  --neutral-foreground-muted: #b3b3b3;
+
+  --neutral-fill-rest: #1b1b1b;
+  --neutral-fill-hover: #2a2a2a;
+  --neutral-fill-active: #3a0a0a;
+
+  --neutral-stroke-rest: #3a3a3a;
+  --neutral-stroke-hover: #ff3333;
+
+  --accent-fill-rest: #b30000;
+  --accent-fill-hover: #e00000;
+  --accent-fill-active: #8b0000;
+  --accent-foreground-rest: #ffffff;
+
+  --danger-rest: #ff3333;
+  --danger-hover: #ff5c5c;
+
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-red: 0 0 18px rgba(255, 0, 0, 0.22);
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  background-color: var(--background-primary);
 }
 
 body {
@@ -16,6 +46,94 @@ body {
   justify-content: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--neutral-foreground-rest);
+  background:
+    radial-gradient(circle at top, rgba(179, 0, 0, 0.18), transparent 35%),
+    linear-gradient(135deg, #080808 0%, #120000 55%, #0d0d0d 100%);
+}
+
+::selection {
+  background-color: var(--accent-fill-rest);
+  color: #ffffff;
+}
+
+a {
+  color: #ff4d4d;
+}
+
+a:hover {
+  color: #ff8080;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  color: var(--accent-foreground-rest);
+  background-color: var(--accent-fill-rest);
+  border: 1px solid #ff3333;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--accent-fill-hover);
+  border-color: #ff6666;
+  box-shadow: var(--shadow-red);
+}
+
+button:active {
+  background-color: var(--accent-fill-active);
+  transform: translateY(1px);
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 2px solid #ff3333;
+  outline-offset: 2px;
+}
+
+input,
+select,
+textarea {
+  color: var(--neutral-foreground-rest);
+  background-color: var(--background-secondary);
+  border: 1px solid var(--neutral-stroke-rest);
+  border-radius: 6px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: #8b0000;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background-color: var(--background-elevated);
+  border-color: #ff3333;
+  box-shadow: 0 0 0 3px rgba(255, 51, 51, 0.14);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #7f7f7f;
 }
 
 .hidden {
@@ -36,6 +154,12 @@ body {
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
+  padding: 1.5rem;
+  background-color: rgba(13, 13, 13, 0.88);
+  border: 1px solid rgba(255, 51, 51, 0.2);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft), var(--shadow-red);
+  backdrop-filter: blur(8px);
 }
 
 .align-items-center {
@@ -52,17 +176,19 @@ body {
 
 h1 {
   margin-bottom: 0.5rem;
+  color: #ff3333;
+  text-shadow: 0 0 12px rgba(255, 0, 0, 0.25);
 }
 
 .caption1 {
   font-size: 1rem;
-  color: var(--neutral-foreground-hover);
+  color: #ff6666;
 }
 
 .caption2 {
   font-size: 0.8rem;
   margin-top: 0.25rem;
-  color: var(--neutral-foreground-rest);
+  color: var(--neutral-foreground-muted);
 }
 
 .packages {
@@ -71,18 +197,43 @@ h1 {
   padding: 0.25rem;
   display: flex;
   flex: 1;
+  background-color: rgba(22, 22, 22, 0.7);
+  border: 1px solid rgba(255, 51, 51, 0.12);
+  border-radius: 8px;
 }
 
 #packageGrid {
   overflow-y: auto;
   width: 100%;
   max-height: 40rem;
+  scrollbar-width: thin;
+  scrollbar-color: #8b0000 #161616;
+}
+
+#packageGrid::-webkit-scrollbar {
+  width: 10px;
+}
+
+#packageGrid::-webkit-scrollbar-track {
+  background: #161616;
+  border-radius: 8px;
+}
+
+#packageGrid::-webkit-scrollbar-thumb {
+  background: #8b0000;
+  border-radius: 8px;
+  border: 2px solid #161616;
+}
+
+#packageGrid::-webkit-scrollbar-thumb:hover {
+  background: #c00000;
 }
 
 .packages .packageName {
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0.25rem 0;
+  color: #ffffff;
 }
 
 .searchBlock {
@@ -97,20 +248,32 @@ h1 {
 
 #searchInput {
   width: 100%;
+  padding: 0.65rem 0.8rem;
 }
 
 .vccUrlField {
   min-width: 450px;
   max-width: 90%;
-  flex-grow:1;
+  flex-grow: 1;
+  padding: 0.65rem 0.8rem;
 }
 
 #addListingToVccHelp {
   z-index: 11;
+  color: var(--neutral-foreground-rest);
+  background-color: var(--background-elevated);
+  border: 1px solid #8b0000;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 #packageInfoModal {
   z-index: 10;
+  color: var(--neutral-foreground-rest);
+  background-color: var(--background-secondary);
+  border: 1px solid #8b0000;
+  border-radius: 10px;
+  box-shadow: var(--shadow-soft), var(--shadow-red);
 }
 
 #rowMoreMenu {
@@ -118,12 +281,28 @@ h1 {
   left: 0;
   position: absolute;
   z-index: 10;
+  min-width: 160px;
+  padding: 0.35rem;
+  background-color: var(--background-elevated);
+  border: 1px solid #8b0000;
+  border-radius: 8px;
+  box-shadow: var(--shadow-soft), var(--shadow-red);
 }
 
 #rowMoreMenu a {
   display: block;
+  padding: 0.55rem 0.7rem;
   text-decoration: none;
   color: var(--neutral-foreground-rest);
+  border-radius: 5px;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+#rowMoreMenu a:hover {
+  color: #ffffff;
+  background-color: rgba(179, 0, 0, 0.55);
 }
 
 .bannerImage {
@@ -135,12 +314,17 @@ h1 {
   background-position: center;
   background-repeat: no-repeat;
   margin-bottom: 0.25rem;
+  border: 1px solid #8b0000;
+  box-shadow: var(--shadow-red);
 }
 
 .badge {
   border-radius: 4px;
   padding: 0.25rem 0.5rem;
-  background-color: var(--neutral-fill-hover);
+  color: #ffffff;
+  background-color: #7a0000;
+  border: 1px solid #ff3333;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.16);
 }
 
 .m-0 {
@@ -353,4 +537,28 @@ h1 {
 
 .flex-1 {
   flex: 1;
+}
+
+@media (max-width: 640px) {
+  body {
+    align-items: flex-start;
+  }
+
+  .content {
+    min-height: 100vh;
+    padding: 1rem;
+    border-radius: 0;
+  }
+
+  .packages,
+  .searchBlock,
+  .bannerImage,
+  .vccUrlField {
+    max-width: 100%;
+  }
+
+  .vccUrlField {
+    min-width: 0;
+    width: 100%;
+  }
 }
