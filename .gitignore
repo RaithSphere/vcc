@@ -1,2 +1,7 @@
 ﻿.idea
 .vscode
+
+# Local preview/build artifacts
+.ci-preview/
+.nuke/
+preview/
