@@ -14,6 +14,7 @@
     },
     "bannerUrl":"https://cytrax.net/CytraX.png",
     "githubRepos":[
-       "raithsphere/shaders"
+       "raithsphere/shaders",
+       "raithsphere/GitUnity"
     ]
 }
